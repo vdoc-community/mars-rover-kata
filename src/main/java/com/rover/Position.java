@@ -14,6 +14,10 @@ public class Position {
 		this.orientation = orientation;
 	}
 	
+	public Position(Position position, Orientation orientation){
+		this(position.getX(), position.getY(), orientation);
+	}
+	
 	public Integer getX() {
 		return x;
 	}

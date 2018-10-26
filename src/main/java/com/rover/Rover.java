@@ -2,19 +2,26 @@ package com.rover;
 
 import java.util.Collection;
 
-public class Rover {
+public class Rover implements PhysicalObject {
 	
-	private Position position;
+	private Grid grid;
 	
-	public Rover(Position position) {
-		this.position = position;
+	public Rover() {
 	}
 	
 	public Position take(Collection<Cmd> cmds) {
 		cmds.forEach((cmd) -> {
-			this.position = cmd.execute(this.position);
+			this.grid.register(this, cmd.execute(this, this.grid));
 		});
-		return position;
+		return getPosition();
 	}
 	
+	public void land(Grid grid, Position initialPosition ) {
+		this.grid = grid;
+		this.grid.register(this,initialPosition);
+	}
+	
+	public Position getPosition() {
+		return this.grid.getPosition(this);
+	}
 }

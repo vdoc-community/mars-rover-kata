@@ -1,4 +1,7 @@
+package com.rover;
+
 import com.rover.Cmd;
+import com.rover.Grid;
 import com.rover.Orientation;
 import com.rover.Position;
 import com.rover.impls.BackwardCmd;
@@ -19,13 +22,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class RoverTest {
 	
 	public static final Position INITIAL_POSITION = new Position(0, 0, Orientation.NORTH);
+	public static final Grid DEFAULT_GRID = new Grid(100, 100);
 	
 	private Rover rover;
 	
 	@BeforeEach
 	public void before(){
-		this.rover = new Rover(INITIAL_POSITION);
-		
+		this.rover = new Rover();
+		this.rover.land(DEFAULT_GRID, INITIAL_POSITION);
+	}
+	
+	@Test
+	public void landTest() {
+		this.rover.land(DEFAULT_GRID, INITIAL_POSITION);
+		assertEquals(INITIAL_POSITION, this.rover.getPosition());
 	}
 	
 	@Test

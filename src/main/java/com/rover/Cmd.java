@@ -2,6 +2,6 @@ package com.rover;
 
 public interface Cmd {
 	
-	Position execute(Position position);
+	Position execute(Rover rover, Grid grid);
 	
 }
